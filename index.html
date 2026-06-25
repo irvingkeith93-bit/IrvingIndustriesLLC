@@ -696,16 +696,22 @@
       justify-content: flex-end;
       gap: 22px;
       color: #bfc1c5;
-      font-size: 24px;
+      font-size: 14px;
     }
 
     .footer-social a {
       color: #bfc1c5;
-      transition: color 0.2s ease, transform 0.2s ease;
+      transition: color 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 7px;
+      padding: 10px 16px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
     }
 
     .footer-social a:hover {
       color: var(--gold-soft);
+      border-color: rgba(216, 173, 85, 0.55);
       transform: translateY(-2px);
     }
 
@@ -1020,7 +1026,7 @@
             <div class="app-content">
               <h3>ChefVault AI</h3>
 
-              <div class="tag">Private Culinary Vault + AI Sous-Chef</div>
+              <div class="tag">Your Kitchen. Your Private Culinary Vault.</div>
 
               <p>
                 ChefVault AI is your private culinary vault — a beautifully
@@ -1030,27 +1036,34 @@
               </p>
 
               <ul class="feature-list">
-                <li>Save, organize, and revisit your favorite recipes</li>
-                <li>Generate recipes from ingredients already in your kitchen</li>
-                <li>Use hands-free Cook Mode with step-by-step guidance</li>
-                <li>Get AI dish evaluations, plating notes, rankings, and milestones</li>
+                <li>Save, organize, and revisit your favorite dishes in one private place</li>
+                <li>Generate AI recipes from proteins and ingredients already in your fridge</li>
+                <li>Cook hands-free with step-by-step Cook Mode, timing, and food-safety guidance</li>
+                <li>Get AI dish evaluations, plating suggestions, Chef Rankings, and milestones</li>
               </ul>
 
               <div class="app-actions">
                 <a
-                  class="store-badge disabled"
-                  href="#"
-                  aria-disabled="true"
-                  onclick="return false;"
+                  class="store-badge"
+                  href="https://apps.apple.com/us/app/chefvault-ai/id6782126418"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <span class="apple"></span>
                   <span>
-                    <span class="store-small">App Store Link</span>
-                    <span class="store-big">Coming Soon</span>
+                    <span class="store-small">Download on the</span>
+                    <span class="store-big">App Store</span>
                   </span>
                 </a>
 
-                <span class="view-link">Private launch placeholder&nbsp;&nbsp;›</span>
+                <a
+                  class="view-link"
+                  href="https://apps.apple.com/us/app/chefvault-ai/id6782126418"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View Details&nbsp;&nbsp;›
+                </a>
               </div>
             </div>
           </article>
@@ -1120,13 +1133,13 @@
 
         <div class="footer-social" aria-label="Social links">
           <a
-            href="https://www.instagram.com/apex.training.app"
+            href="https://www.instagram.com/irvingindustries"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Instagram"
-            title="Instagram"
+            aria-label="Follow Irving Industries on Instagram"
+            title="Follow on Instagram"
           >
-            ◎
+            Follow on Instagram
           </a>
         </div>
       </div>
