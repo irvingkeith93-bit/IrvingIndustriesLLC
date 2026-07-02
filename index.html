@@ -13,19 +13,33 @@
 
   <style>
     :root {
-      --bg: #050505;
-      --black: #08090b;
-      --panel: #0d1014;
-      --white: #f7f7f7;
-      --silver: #c9c9c9;
-      --muted: #9b9fa5;
-      --line: rgba(255, 255, 255, 0.13);
-      --gold: #d8ad55;
-      --gold-soft: #f3d38d;
-      --purple: #8b5cff;
-      --orange: #ff950f;
-      --teal: #2dd4bf;
-      --chef: #d28a45;
+      --black: #020304;
+      --black-2: #07080a;
+      --white: #f8f8f8;
+      --soft-white: rgba(255, 255, 255, 0.82);
+      --muted: rgba(255, 255, 255, 0.58);
+      --faint: rgba(255, 255, 255, 0.34);
+
+      --glass: rgba(255, 255, 255, 0.065);
+      --glass-strong: rgba(255, 255, 255, 0.105);
+      --glass-line: rgba(255, 255, 255, 0.18);
+
+      --steel: #d8dde3;
+      --steel-dark: #6e767f;
+      --steel-soft: rgba(216, 221, 227, 0.72);
+
+      --gold: #d7aa64;
+      --copper: #c9834a;
+      --cyan: #73f4ff;
+      --green: #76ffb0;
+      --purple: #9b7dff;
+
+      --radius-xl: 34px;
+      --radius-lg: 26px;
+      --radius-md: 20px;
+
+      --shadow: 0 30px 90px rgba(0, 0, 0, 0.62);
+      --inner-light: inset 0 1px 0 rgba(255, 255, 255, 0.22);
     }
 
     * {
@@ -39,9 +53,9 @@
     body {
       margin: 0;
       color: var(--white);
+      background: var(--black);
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
         "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-      background: var(--bg);
       overflow-x: hidden;
     }
 
@@ -50,705 +64,686 @@
       text-decoration: none;
     }
 
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
     .page {
       min-height: 100vh;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
       background:
-        radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.07), transparent 28%),
-        radial-gradient(circle at 20% 20%, rgba(216, 173, 85, 0.04), transparent 22%),
-        #050505;
+        radial-gradient(circle at 50% -10%, rgba(255, 255, 255, 0.13), transparent 27%),
+        radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.045), transparent 24%),
+        radial-gradient(circle at 92% 12%, rgba(115, 244, 255, 0.055), transparent 22%),
+        radial-gradient(circle at 50% 72%, rgba(215, 170, 100, 0.06), transparent 26%),
+        linear-gradient(180deg, #07080a 0%, #020304 42%, #030405 100%);
+    }
+
+    .page::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      opacity: 0.72;
+      background:
+        linear-gradient(118deg, transparent 0 12%, rgba(255, 255, 255, 0.035) 12.15%, transparent 12.55% 100%),
+        linear-gradient(52deg, transparent 0 28%, rgba(255, 255, 255, 0.025) 28.15%, transparent 28.55% 100%),
+        linear-gradient(142deg, transparent 0 51%, rgba(255, 255, 255, 0.028) 51.15%, transparent 51.55% 100%),
+        linear-gradient(28deg, transparent 0 77%, rgba(255, 255, 255, 0.022) 77.15%, transparent 77.55% 100%),
+        radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.11), transparent 35%);
+      pointer-events: none;
+    }
+
+    .page::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.22;
+      background-image:
+        repeating-linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.028) 0,
+          rgba(255, 255, 255, 0.028) 1px,
+          transparent 1px,
+          transparent 7px
+        );
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .shell {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .liquid {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--glass-line);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.028)),
+        radial-gradient(circle at 16% 0%, rgba(255, 255, 255, 0.18), transparent 31%),
+        radial-gradient(circle at 92% 16%, rgba(255, 255, 255, 0.075), transparent 28%),
+        rgba(9, 11, 13, 0.72);
+      box-shadow:
+        var(--shadow),
+        var(--inner-light),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(22px) saturate(140%);
+      -webkit-backdrop-filter: blur(22px) saturate(140%);
+    }
+
+    .liquid::before {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border-radius: inherit;
+      pointer-events: none;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.16), transparent 28%, rgba(255, 255, 255, 0.055) 62%, transparent 100%);
+      opacity: 0.78;
+    }
+
+    .steel-text {
+      background: linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #d9dee4 22%,
+        #7d858d 48%,
+        #f5f7f9 68%,
+        #8b929a 100%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 18px 55px rgba(255, 255, 255, 0.07);
     }
 
     .nav {
-      height: 72px;
       position: sticky;
       top: 0;
-      z-index: 100;
-      background: rgba(4, 4, 5, 0.9);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 50;
+      padding: 18px 0 0;
     }
 
-    .nav-inner {
-      width: min(1380px, calc(100% - 56px));
-      height: 100%;
-      margin: 0 auto;
+    .nav-bar {
+      min-height: 72px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 28px;
+      padding: 12px 22px;
+      border-radius: 999px;
     }
 
-    .nav-logo,
-    .hero-logo,
-    .footer-logo {
-      display: block;
-      width: auto;
+    .brand-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 210px;
+    }
+
+    .brand-logo {
+      width: 188px;
       height: auto;
-      max-width: 100%;
       object-fit: contain;
-      object-position: center;
-      border: none;
-      outline: none;
-      filter: none;
-      box-shadow: none;
-      border-radius: 0;
-    }
-
-    .nav-logo {
-      width: 190px;
-    }
-
-    .hero-logo {
-      width: min(720px, 100%);
-    }
-
-    .footer-logo {
-      width: 150px;
+      filter: drop-shadow(0 10px 28px rgba(255, 255, 255, 0.06));
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 28px;
-      text-transform: uppercase;
-      font-size: 12px;
-      letter-spacing: 0.03em;
-      color: #e6e6e6;
-      white-space: nowrap;
+      justify-content: center;
+      gap: 6px;
+      flex-wrap: wrap;
     }
 
     .nav-links a {
-      position: relative;
-      opacity: 0.94;
-      transition: color 0.2s ease, opacity 0.2s ease;
+      padding: 12px 14px;
+      border-radius: 999px;
+      color: var(--soft-white);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
     }
 
     .nav-links a:hover {
-      color: var(--gold-soft);
-      opacity: 1;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-1px);
     }
 
-    .nav-links a.active::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -13px;
-      height: 2px;
-      background: var(--gold);
-    }
-
-    .contact-button {
-      color: var(--gold-soft) !important;
-      border: 1px solid rgba(216, 173, 85, 0.58);
-      border-radius: 6px;
-      padding: 12px 22px;
-      background: rgba(216, 173, 85, 0.035);
-      letter-spacing: 0.1em;
-      font-weight: 700;
+    .nav-cta {
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.035));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
     }
 
     .hero {
-      position: relative;
-      overflow: hidden;
-      min-height: 560px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      background:
-        radial-gradient(circle at 72% 22%, rgba(255, 255, 255, 0.16), transparent 21%),
-        radial-gradient(circle at 58% 55%, rgba(255, 255, 255, 0.055), transparent 30%),
-        linear-gradient(90deg, rgba(0, 0, 0, 0.96) 0%, rgba(0, 0, 0, 0.72) 42%, rgba(0, 0, 0, 0.55) 100%),
-        #0a0a0a;
+      padding: 92px 0 70px;
+      text-align: center;
     }
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      opacity: 0.72;
-      background:
-        linear-gradient(120deg, transparent 0 12%, rgba(255, 255, 255, 0.045) 12.2%, transparent 12.6% 100%),
-        linear-gradient(35deg, transparent 0 32%, rgba(255, 255, 255, 0.04) 32.2%, transparent 32.6% 100%),
-        linear-gradient(155deg, transparent 0 55%, rgba(255, 255, 255, 0.035) 55.2%, transparent 55.7% 100%),
-        radial-gradient(circle at 75% 30%, rgba(255, 255, 255, 0.1), transparent 18%),
-        radial-gradient(circle at 35% 62%, rgba(255, 255, 255, 0.04), transparent 24%);
-      pointer-events: none;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 70% 28%, transparent 0 19%, rgba(0, 0, 0, 0.12) 34%, rgba(0, 0, 0, 0.68) 100%),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 55%);
-      pointer-events: none;
-    }
-
-    .hero-inner {
-      position: relative;
-      z-index: 2;
-      width: min(1380px, calc(100% - 56px));
-      margin: 0 auto;
-      min-height: 560px;
-      display: grid;
-      grid-template-columns: 44% 56%;
-      align-items: center;
-      gap: 32px;
+    .hero-mark {
+      width: min(620px, 92%);
+      margin: 0 auto 34px;
+      filter:
+        drop-shadow(0 26px 50px rgba(0, 0, 0, 0.65))
+        drop-shadow(0 0 20px rgba(255, 255, 255, 0.07));
     }
 
     .eyebrow {
-      color: var(--gold-soft);
-      font-size: 15px;
+      margin: 0 0 16px;
+      color: var(--steel-soft);
+      font-size: 12px;
+      font-weight: 900;
       letter-spacing: 0.42em;
       text-transform: uppercase;
-      margin-bottom: 18px;
     }
 
     h1 {
-      margin: 0;
-      font-size: clamp(42px, 5vw, 70px);
-      line-height: 1.05;
-      letter-spacing: -0.055em;
-      max-width: 680px;
-      background: linear-gradient(
-        180deg,
-        #fff 0%,
-        #cfcfcf 48%,
-        #868686 67%,
-        #f1f1f1 100%
-      );
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      text-shadow: 0 28px 64px rgba(0, 0, 0, 0.7);
+      margin: 0 auto;
+      max-width: 900px;
+      font-size: clamp(42px, 7vw, 86px);
+      line-height: 0.94;
+      letter-spacing: -0.065em;
+      font-weight: 900;
     }
 
-    .hero-rule {
-      width: 80px;
-      height: 2px;
-      background: linear-gradient(90deg, var(--gold-soft), transparent);
-      margin: 28px 0;
+    .hero-subtitle {
+      max-width: 700px;
+      margin: 28px auto 0;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: clamp(17px, 2vw, 22px);
+      line-height: 1.55;
     }
 
-    .hero-copy p {
-      color: #c1c4c8;
-      font-size: 17px;
-      line-height: 1.62;
-      max-width: 585px;
-      margin: 0 0 24px;
+    .hero-subtitle strong {
+      color: #fff;
+      font-weight: 800;
     }
 
-    .gold {
-      color: var(--gold-soft);
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 38px;
     }
 
     .button {
+      min-height: 52px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 48px;
-      padding: 0 30px;
-      border: 1px solid rgba(216, 173, 85, 0.55);
-      border-radius: 6px;
-      color: var(--gold-soft);
-      background: rgba(0, 0, 0, 0.28);
+      gap: 12px;
+      padding: 0 24px;
+      border-radius: 999px;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      font-size: 13px;
-      letter-spacing: 0.12em;
-      font-weight: 800;
-      transition: transform 0.2s ease, background 0.2s ease,
-        border-color 0.2s ease;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.20), rgba(255, 255, 255, 0.045)),
+        rgba(255, 255, 255, 0.05);
+      box-shadow:
+        0 18px 46px rgba(0, 0, 0, 0.42),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     }
 
     .button:hover {
       transform: translateY(-2px);
-      background: rgba(216, 173, 85, 0.08);
-      border-color: var(--gold-soft);
+      border-color: rgba(255, 255, 255, 0.45);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.26), rgba(255, 255, 255, 0.065)),
+        rgba(255, 255, 255, 0.07);
     }
 
-    .hero-logo-wrap {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 34px 0;
+    .button.secondary {
+      color: rgba(255, 255, 255, 0.78);
+      background: rgba(255, 255, 255, 0.035);
     }
 
-    .apps-section {
-      width: min(1380px, calc(100% - 56px));
-      margin: 0 auto;
-      padding: 44px 0 56px;
+    .section {
+      padding: 72px 0;
     }
 
-    .section-title {
+    .section-heading {
       text-align: center;
-      padding: 0 0 28px;
+      margin-bottom: 34px;
     }
 
-    .section-title h2 {
-      margin: 0;
-      color: #f7f7f7;
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 14px;
+      color: var(--steel-soft);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.38em;
       text-transform: uppercase;
-      letter-spacing: 0.42em;
-      font-size: clamp(19px, 2.2vw, 29px);
-      font-weight: 500;
     }
 
-    .section-title p {
-      margin: 10px 0 0;
+    .section-kicker::before,
+    .section-kicker::after {
+      content: "";
+      width: 58px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.68), transparent);
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: clamp(32px, 5vw, 58px);
+      line-height: 1;
+      letter-spacing: -0.055em;
+    }
+
+    .section-heading p {
+      max-width: 620px;
+      margin: 18px auto 0;
       color: var(--muted);
       font-size: 17px;
+      line-height: 1.6;
     }
 
-    .app-grid {
+    .apps-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-top: 0;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      align-items: stretch;
     }
 
     .app-card {
-      min-height: 292px;
-      position: relative;
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: 118px 1fr;
-      gap: 22px;
-      padding: 28px;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 18px;
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.018)),
-        radial-gradient(circle at 25% 0%, rgba(255, 255, 255, 0.06), transparent 28%),
-        rgba(9, 12, 16, 0.88);
+      min-height: 360px;
+      border-radius: var(--radius-xl);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 26px;
+      transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .app-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 255, 255, 0.34);
       box-shadow:
-        0 24px 65px rgba(0, 0, 0, 0.42),
-        inset 0 1px 0 rgba(255, 255, 255, 0.06);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+        0 38px 110px rgba(0, 0, 0, 0.72),
+        0 0 42px rgba(255, 255, 255, 0.055),
+        var(--inner-light);
+    }
+
+    .app-card.featured {
+      grid-column: 1 / -1;
+      min-height: 430px;
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      align-items: center;
+      gap: 36px;
+      background:
+        radial-gradient(circle at 16% 18%, rgba(115, 244, 255, 0.16), transparent 26%),
+        radial-gradient(circle at 82% 24%, rgba(215, 170, 100, 0.12), transparent 30%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.028)),
+        rgba(9, 11, 13, 0.74);
+    }
+
+    .app-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .app-icon {
+      width: 92px;
+      height: 92px;
+      border-radius: 24px;
+      object-fit: cover;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow:
+        0 22px 48px rgba(0, 0, 0, 0.50),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .featured .app-icon {
+      width: min(230px, 100%);
+      height: auto;
+      margin: 0 auto;
+      border-radius: 46px;
+      box-shadow:
+        0 36px 80px rgba(0, 0, 0, 0.58),
+        0 0 55px rgba(115, 244, 255, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    }
+
+    .app-badge {
+      padding: 9px 12px;
+      border-radius: 999px;
+      color: rgba(255, 255, 255, 0.74);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.055);
+      white-space: nowrap;
+    }
+
+    .app-copy {
+      position: relative;
+      z-index: 2;
+    }
+
+    .app-copy h3 {
+      margin: 0;
+      font-size: clamp(27px, 3vw, 42px);
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+    }
+
+    .app-tagline {
+      margin: 12px 0 0;
+      color: rgba(255, 255, 255, 0.80);
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .app-copy p {
+      max-width: 560px;
+      margin: 18px 0 0;
+      color: rgba(255, 255, 255, 0.60);
+      font-size: 15px;
+      line-height: 1.62;
+    }
+
+    .micro-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .micro-list span {
+      padding: 8px 11px;
+      border-radius: 999px;
+      color: rgba(255, 255, 255, 0.68);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.045);
+    }
+
+    .app-actions {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .store-link {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 16px;
+      border-radius: 999px;
+      color: #fff;
+      background: #050505;
+      border: 1px solid rgba(255, 255, 255, 0.26);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.38);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .store-link:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.55);
+    }
+
+    .apple-mark {
+      font-size: 23px;
+      line-height: 1;
+    }
+
+    .store-text {
+      display: grid;
+      gap: 1px;
+      line-height: 1;
+    }
+
+    .store-small {
+      font-size: 9px;
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .store-big {
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+
+    .text-link {
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s ease;
+    }
+
+    .text-link:hover {
+      color: #fff;
+    }
+
+    .coming-soon {
+      cursor: default;
+      opacity: 0.8;
+    }
+
+    .app-card.apex {
+      --accent: var(--purple);
+    }
+
+    .app-card.objective {
+      --accent: var(--cyan);
+    }
+
+    .app-card.puff {
+      --accent: var(--green);
+    }
+
+    .app-card.chefvault {
+      --accent: var(--copper);
+    }
+
+    .app-card.proxcimity {
+      --accent: var(--cyan);
     }
 
     .app-card::after {
       content: "";
       position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 96px;
-      opacity: 0.82;
-      background:
-        radial-gradient(ellipse at 50% 100%, var(--wave-glow), transparent 60%),
-        repeating-linear-gradient(170deg, transparent 0 9px, var(--wave-line) 10px, transparent 11px 20px);
-      mask-image: linear-gradient(transparent, black 40%);
-      -webkit-mask-image: linear-gradient(transparent, black 40%);
+      width: 320px;
+      height: 320px;
+      right: -160px;
+      bottom: -190px;
+      border-radius: 50%;
+      background: radial-gradient(circle, color-mix(in srgb, var(--accent), transparent 62%), transparent 65%);
+      opacity: 0.72;
       pointer-events: none;
     }
 
-    .app-card::before {
-      content: "";
-      position: absolute;
-      inset: 1px;
-      border-radius: 17px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent 32%, rgba(255,255,255,0.025));
-      pointer-events: none;
+    .legal-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
     }
 
-    .app-icon {
-      width: 88px;
-      height: 88px;
-      border-radius: 20px;
+    .legal-card {
+      min-height: 220px;
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.22s ease, border-color 0.22s ease;
+    }
+
+    .legal-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.32);
+    }
+
+    .legal-icon {
+      width: 48px;
+      height: 48px;
       display: grid;
       place-items: center;
-      position: relative;
-      border: 1px solid rgba(255, 255, 255, 0.19);
-      box-shadow:
-        0 18px 38px rgba(0, 0, 0, 0.45),
-        inset 0 1px 0 rgba(255, 255, 255, 0.22);
-      z-index: 2;
-      overflow: hidden;
-    }
-
-    .app-icon img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .apex {
-      --wave-glow: rgba(92, 85, 255, 0.5);
-      --wave-line: rgba(118, 87, 255, 0.28);
-    }
-
-    .apex .app-icon {
-      background: linear-gradient(145deg, #11182a, #101020 65%, #0b0c11);
-    }
-
-    .apex .app-icon::before {
-      content: "A";
-      font-size: 56px;
-      line-height: 1;
-      font-weight: 950;
-      background: linear-gradient(135deg, #55d5ff, #745cff 48%, #c65cff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .objective {
-      --wave-glow: rgba(255, 141, 14, 0.46);
-      --wave-line: rgba(255, 141, 14, 0.25);
-    }
-
-    .objective .app-icon {
-      background: linear-gradient(145deg, #ffac24, #9a4b00 78%);
-      color: #ffd18a;
-      font-size: 58px;
-      font-weight: 950;
-      text-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
-    }
-
-    .puff {
-      --wave-glow: rgba(45, 212, 191, 0.42);
-      --wave-line: rgba(45, 212, 191, 0.22);
-    }
-
-    .puff .app-icon {
+      border-radius: 16px;
+      color: rgba(255, 255, 255, 0.86);
+      border: 1px solid rgba(255, 255, 255, 0.16);
       background:
-        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.22), transparent 28%),
-        linear-gradient(145deg, #082f2b, #0f766e 48%, #071313);
-      color: #ffffff;
-      font-size: 20px;
-      font-weight: 950;
-      letter-spacing: -0.05em;
+        linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.035));
+      font-size: 22px;
     }
 
-    .puff .tag,
-    .puff .view-link {
-      color: #55f0d7;
-    }
-
-    .chefvault {
-      --wave-glow: rgba(210, 138, 69, 0.5);
-      --wave-line: rgba(210, 138, 69, 0.25);
-    }
-
-    .chefvault .app-icon {
-      background: #111111;
-      border-color: rgba(210, 138, 69, 0.45);
-    }
-
-    .chefvault .tag,
-    .chefvault .view-link {
-      color: #f0b477;
-    }
-
-    .future {
-      --wave-glow: rgba(216, 173, 85, 0.48);
-      --wave-line: rgba(216, 173, 85, 0.24);
-    }
-
-    .future .app-icon {
-      background: linear-gradient(145deg, #222, #090909);
-    }
-
-    .future .app-icon::before {
-      content: "";
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      border: 3px solid var(--gold-soft);
-      box-shadow: 0 0 26px rgba(216, 173, 85, 0.48);
-    }
-
-    .app-content {
-      position: relative;
-      z-index: 2;
-    }
-
-    .app-content h3 {
-      margin: 0 0 8px;
-      font-size: 26px;
-      letter-spacing: -0.04em;
-      font-weight: 700;
-    }
-
-    .tag {
-      color: var(--gold-soft);
-      font-size: 13px;
-      margin-bottom: 14px;
-      font-weight: 700;
-      letter-spacing: 0.01em;
-    }
-
-    .apex .tag {
-      color: #9d86ff;
-    }
-
-    .objective .tag {
-      color: var(--orange);
-    }
-
-    .app-content p {
-      margin: 0 0 20px;
-      color: #c3c7cc;
-      font-size: 14px;
-      line-height: 1.6;
-      max-width: 460px;
-    }
-
-    .feature-list {
-      margin: 0 0 20px;
-      padding: 0;
-      list-style: none;
-      display: grid;
-      gap: 8px;
-      color: rgba(255,255,255,0.78);
-      font-size: 13px;
-      line-height: 1.35;
-    }
-
-    .feature-list li {
-      position: relative;
-      padding-left: 18px;
-    }
-
-    .feature-list li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: var(--gold-soft);
-    }
-
-    .puff .feature-list li::before {
-      color: #55f0d7;
-    }
-
-    .chefvault .feature-list li::before {
-      color: #f0b477;
-    }
-
-    .app-actions {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    .store-badge {
-      min-height: 42px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 13px;
-      border-radius: 7px;
-      background: #050505;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      color: #fff;
-      line-height: 1;
-      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
-      transition: transform 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
-    }
-
-    .store-badge:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255,255,255,0.55);
-    }
-
-    .store-badge.disabled {
-      opacity: 0.62;
-      cursor: not-allowed;
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.16);
-    }
-
-    .store-badge.disabled:hover {
-      transform: none;
-      border-color: rgba(255,255,255,0.16);
-    }
-
-    .apple {
-      font-size: 23px;
-    }
-
-    .store-small {
-      display: block;
-      font-size: 9px;
-      letter-spacing: 0.01em;
-    }
-
-    .store-big {
-      display: block;
+    .legal-card h3 {
+      margin: 20px 0 8px;
       font-size: 18px;
-      font-weight: 700;
       letter-spacing: -0.03em;
     }
 
-    .view-link {
-      color: var(--gold-soft);
-      font-size: 13px;
-      font-weight: 700;
+    .legal-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
     }
 
-    .apex .view-link {
-      color: #9d86ff;
-    }
-
-    .objective .view-link {
-      color: var(--orange);
-    }
-
-    .investor-card {
-      margin-top: 16px;
-      border: 1px solid rgba(216, 173, 85, 0.26);
-      border-radius: 18px;
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.012)),
-        rgba(7, 9, 12, 0.88);
-      display: grid;
-      grid-template-columns: 140px 1fr 1.1fr;
-      align-items: center;
-      gap: 34px;
-      padding: 32px 44px;
-      box-shadow: 0 24px 65px rgba(0, 0, 0, 0.42);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-    }
-
-    .investor-icon {
-      width: 94px;
-      height: 94px;
-      border-radius: 50%;
+    .legal-card .arrow {
+      margin-top: 22px;
+      width: 36px;
+      height: 36px;
       display: grid;
       place-items: center;
-      color: var(--gold-soft);
-      border: 1px solid rgba(216, 173, 85, 0.48);
-      font-size: 42px;
-      margin: 0 auto;
-      box-shadow: 0 0 42px rgba(216, 173, 85, 0.08);
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: rgba(255, 255, 255, 0.82);
     }
 
-    .investor-copy h3 {
-      margin: 0 0 9px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-size: 23px;
-      font-weight: 500;
+    .investor-panel {
+      border-radius: var(--radius-xl);
+      padding: 38px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 30px;
+      text-align: left;
     }
 
-    .investor-copy p {
+    .investor-panel h2 {
       margin: 0;
-      color: #c3c7cc;
-      font-size: 18px;
-      line-height: 1.45;
-      max-width: 560px;
+      font-size: clamp(30px, 4vw, 56px);
+      line-height: 1;
+      letter-spacing: -0.055em;
     }
 
-    .serious {
-      margin-top: 10px !important;
-      color: var(--gold-soft) !important;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      font-size: 12px !important;
+    .investor-panel p {
+      max-width: 660px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.6;
     }
 
-    .email-panel {
-      min-height: 88px;
-      border-left: 1px solid rgba(255, 255, 255, 0.12);
-      padding-left: 54px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 8px;
+    .footer {
+      padding: 38px 0 28px;
     }
 
-    .email-panel a {
-      color: #fff;
-      font-size: 22px;
-      font-weight: 700;
-      word-break: break-word;
-    }
-
-    .email-panel span {
-      color: #c3c7cc;
-      font-size: 15px;
-      line-height: 1.45;
-    }
-
-    footer {
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 24px 0;
-    }
-
-    .footer-inner {
-      width: min(1380px, calc(100% - 56px));
-      margin: 0 auto;
+    .footer-panel {
+      border-radius: var(--radius-xl);
+      padding: 28px;
       display: grid;
       grid-template-columns: 1fr auto 1fr;
       align-items: center;
       gap: 24px;
-      color: #8d8f94;
-      font-size: 13px;
+    }
+
+    .footer-logo {
+      width: 190px;
+      height: auto;
+    }
+
+    .footer-center {
+      color: rgba(255, 255, 255, 0.48);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      text-align: center;
     }
 
     .footer-social {
       display: flex;
       justify-content: flex-end;
-      gap: 22px;
-      color: #bfc1c5;
-      font-size: 14px;
     }
 
-    .footer-social a {
-      color: #bfc1c5;
-      transition: color 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      border-radius: 7px;
-      padding: 10px 16px;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
+    @media (max-width: 980px) {
+      .nav-bar {
+        border-radius: 28px;
+        align-items: flex-start;
+        flex-direction: column;
+      }
 
-    .footer-social a:hover {
-      color: var(--gold-soft);
-      border-color: rgba(216, 173, 85, 0.55);
-      transform: translateY(-2px);
-    }
+      .brand-logo {
+        width: 170px;
+      }
 
-    @media (max-width: 1180px) {
       .nav-links {
-        display: none;
-      }
-
-      .hero-inner {
-        grid-template-columns: 1fr;
-        padding: 60px 0 48px;
-      }
-
-      .hero-logo-wrap {
         justify-content: flex-start;
       }
 
-      .app-grid {
+      .apps-grid {
         grid-template-columns: 1fr;
       }
 
-      .app-card {
-        grid-template-columns: 96px 1fr;
-      }
-
-      .investor-card {
+      .app-card.featured {
         grid-template-columns: 1fr;
         text-align: center;
       }
 
-      .email-panel {
-        border-left: 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.12);
-        padding: 28px 0 0;
+      .featured .app-actions,
+      .featured .micro-list {
+        justify-content: center;
       }
 
-      .footer-inner {
+      .legal-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .investor-panel,
+      .footer-panel {
         grid-template-columns: 1fr;
         text-align: center;
         justify-items: center;
@@ -760,58 +755,52 @@
     }
 
     @media (max-width: 620px) {
-      .nav-inner,
-      .hero-inner,
-      .apps-section,
-      .footer-inner {
-        width: min(100% - 28px, 1380px);
-      }
-
-      .nav-logo {
-        width: 165px;
+      .shell {
+        width: min(100% - 26px, 1180px);
       }
 
       .hero {
-        min-height: auto;
+        padding-top: 62px;
       }
 
-      .hero-copy {
-        padding-top: 10px;
+      .nav-links a {
+        padding: 10px 11px;
+        font-size: 10px;
       }
 
-      h1 {
-        font-size: 42px;
+      .hero-mark {
+        width: 96%;
       }
 
-      .eyebrow {
-        font-size: 12px;
-        letter-spacing: 0.28em;
-      }
-
-      .hero-logo {
-        width: 100%;
-      }
-
-      .section-title h2 {
-        letter-spacing: 0.24em;
+      .section {
+        padding: 54px 0;
       }
 
       .app-card {
-        grid-template-columns: 1fr;
+        min-height: auto;
         padding: 24px;
+        border-radius: 26px;
       }
 
-      .app-icon {
-        width: 82px;
-        height: 82px;
+      .app-top {
+        flex-direction: column;
       }
 
-      .investor-card {
-        padding: 28px 22px;
+      .legal-grid {
+        grid-template-columns: 1fr;
       }
 
-      .footer-logo {
-        width: 135px;
+      .investor-panel {
+        padding: 28px;
+      }
+
+      .section-kicker {
+        letter-spacing: 0.24em;
+      }
+
+      .section-kicker::before,
+      .section-kicker::after {
+        width: 30px;
       }
     }
   </style>
@@ -820,327 +809,429 @@
 <body>
   <div class="page">
     <header class="nav">
-      <div class="nav-inner">
-        <a href="#home" aria-label="Irving Industries home">
-          <img
-            class="nav-logo"
-            src="./irving-industries-main-logo.jpeg"
-            alt="Irving Industries LLC logo"
-          />
-        </a>
-
-        <nav class="nav-links" aria-label="Primary navigation">
-          <a href="#home" class="active">Home</a>
-          <a href="#apex">Apex AI</a>
-          <a href="#objective">Objective Seven</a>
-          <a href="#puff">Puff, Puff, Pass</a>
-          <a href="#chefvault">ChefVault AI</a>
-          <a href="#future">Next Launch</a>
-          <a href="#investors">Investors</a>
-          <a
-            class="contact-button"
-            href="mailto:irvingindustries@outlook.com?subject=Irving%20Industries%20Inquiry"
-          >
-            Contact
+      <div class="shell">
+        <div class="nav-bar liquid">
+          <a class="brand-link" href="#home" aria-label="Irving Industries home">
+            <img
+              class="brand-logo"
+              src="./irving-industries-main-logo.jpeg"
+              alt="Irving Industries LLC logo"
+            />
           </a>
-        </nav>
+
+          <nav class="nav-links" aria-label="Primary navigation">
+            <a href="#home">Home</a>
+            <a href="#apps">Apps</a>
+            <a href="#legal">Legal</a>
+            <a href="#investors">Investors</a>
+            <a
+              class="nav-cta"
+              href="mailto:irvingindustries@outlook.com?subject=Irving%20Industries%20Inquiry"
+            >
+              Contact
+            </a>
+          </nav>
+        </div>
       </div>
     </header>
 
     <main>
       <section id="home" class="hero">
-        <div class="hero-inner">
-          <div class="hero-copy">
-            <div class="eyebrow">Irving Industries LLC</div>
+        <div class="shell">
+          <img
+            class="hero-mark"
+            src="./irving-industries-main-logo.jpeg"
+            alt="Irving Industries LLC logo"
+          />
 
-            <h1>Building the Future of Software & Digital Assets</h1>
+          <p class="eyebrow">Irving Industries LLC</p>
 
-            <div class="hero-rule"></div>
+          <h1 class="steel-text">Building the Future of Software & Digital Assets</h1>
 
-            <p>
-              Irving Industries LLC is a forward-thinking software company
-              developing intelligent, high-performance applications that empower
-              people to train, think, cook, connect, and grow.
-            </p>
+          <p class="hero-subtitle">
+            A selective ecosystem of high-performance apps and digital products.
+            <strong>Early momentum. Private launches. More to come.</strong>
+          </p>
 
-            <p>
-              This is just the beginning.<br />
-              <span class="gold">The future is under construction.</span>
-            </p>
-
-            <a class="button" href="#apps">Explore Apps&nbsp;&nbsp;›</a>
-          </div>
-
-          <div class="hero-logo-wrap">
-            <img
-              class="hero-logo"
-              src="./irving-industries-main-logo.jpeg"
-              alt="Irving Industries LLC logo"
-            />
+          <div class="hero-actions">
+            <a class="button" href="#apps">Explore Apps <span>→</span></a>
+            <a
+              class="button secondary"
+              href="mailto:irvingindustries@outlook.com?subject=Request%20Access%20-%20Irving%20Industries"
+            >
+              Request Access <span>→</span>
+            </a>
           </div>
         </div>
       </section>
 
-      <section id="apps" class="apps-section">
-        <div class="section-title">
-          <h2>Our Current Apps</h2>
-          <p>High-performance experiences. Engineered with purpose.</p>
-        </div>
-
-        <div class="app-grid">
-          <article id="apex" class="app-card apex">
-            <div class="app-icon" aria-hidden="true"></div>
-
-            <div class="app-content">
-              <h3>Apex AI Training</h3>
-
-              <div class="tag">AI-Integrated Workout Companion</div>
-
-              <p>
-                Your intelligent fitness partner that adapts to you. Real-time
-                guidance, personalized workouts, and AI-powered insights to help
-                you train smarter and achieve more.
-              </p>
-
-              <div class="app-actions">
-                <a
-                  class="store-badge"
-                  href="https://apps.apple.com/us/app/apex-ai-training/id6761805344"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span class="apple"></span>
-                  <span>
-                    <span class="store-small">Download on the</span>
-                    <span class="store-big">App Store</span>
-                  </span>
-                </a>
-
-                <a
-                  class="view-link"
-                  href="https://apps.apple.com/us/app/apex-ai-training/id6761805344"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View Details&nbsp;&nbsp;›
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <article id="objective" class="app-card objective">
-            <div class="app-icon" aria-hidden="true">7</div>
-
-            <div class="app-content">
-              <h3>Objective Seven</h3>
-
-              <div class="tag">Precision. Focus. Mastery.</div>
-
-              <p>
-                Objective Seven is a precision memory challenge designed to
-                sharpen your mind and elevate your focus. Train your cognitive
-                performance through immersive, discipline-driven gameplay.
-              </p>
-
-              <div class="app-actions">
-                <a
-                  class="store-badge"
-                  href="https://apps.apple.com/us/app/objective-seven/id6762837362"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span class="apple"></span>
-                  <span>
-                    <span class="store-small">Download on the</span>
-                    <span class="store-big">App Store</span>
-                  </span>
-                </a>
-
-                <a
-                  class="view-link"
-                  href="https://apps.apple.com/us/app/objective-seven/id6762837362"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View Details&nbsp;&nbsp;›
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <article id="puff" class="app-card puff">
-            <div class="app-icon" aria-hidden="true">PPP</div>
-
-            <div class="app-content">
-              <h3>Puff, Puff, Pass</h3>
-
-              <div class="tag">Quit Smoking & Vaping Companion</div>
-
-              <p>
-                Puff, Puff, Pass helps users take back control one day at a time.
-                Track smoke-free progress, watch health milestones build, manage
-                cravings, log your mood, earn crowns, and see your savings grow.
-              </p>
-
-              <ul class="feature-list">
-                <li>Smoke-free day and quit-streak tracking</li>
-                <li>Science-based health recovery milestones</li>
-                <li>Breathing tools, craving support, and daily motivation</li>
-                <li>Mood logging, crowns, progress, and savings tracking</li>
-              </ul>
-
-              <div class="app-actions">
-                <a
-                  class="store-badge"
-                  href="https://apps.apple.com/us/app/puff-puff-pass/id6777687917"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span class="apple"></span>
-                  <span>
-                    <span class="store-small">Download on the</span>
-                    <span class="store-big">App Store</span>
-                  </span>
-                </a>
-
-                <a
-                  class="view-link"
-                  href="https://apps.apple.com/us/app/puff-puff-pass/id6777687917"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View Details&nbsp;&nbsp;›
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <article id="chefvault" class="app-card chefvault">
-            <div class="app-icon">
-              <img
-                src="./chefvault-ai-app-icon.png"
-                alt="ChefVault AI app icon"
-              />
-            </div>
-
-            <div class="app-content">
-              <h3>ChefVault AI</h3>
-
-              <div class="tag">Your Kitchen. Your Private Culinary Vault.</div>
-
-              <p>
-                ChefVault AI is your private culinary vault — a beautifully
-                crafted home for your recipes, powered by an AI sous-chef that
-                helps you cook smarter, plate like a pro, and track how your
-                skills grow over time.
-              </p>
-
-              <ul class="feature-list">
-                <li>Save, organize, and revisit your favorite dishes in one private place</li>
-                <li>Generate AI recipes from proteins and ingredients already in your fridge</li>
-                <li>Cook hands-free with step-by-step Cook Mode, timing, and food-safety guidance</li>
-                <li>Get AI dish evaluations, plating suggestions, Chef Rankings, and milestones</li>
-              </ul>
-
-              <div class="app-actions">
-                <a
-                  class="store-badge"
-                  href="https://apps.apple.com/us/app/chefvault-ai/id6782126418"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span class="apple"></span>
-                  <span>
-                    <span class="store-small">Download on the</span>
-                    <span class="store-big">App Store</span>
-                  </span>
-                </a>
-
-                <a
-                  class="view-link"
-                  href="https://apps.apple.com/us/app/chefvault-ai/id6782126418"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View Details&nbsp;&nbsp;›
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <article id="future" class="app-card future">
-            <div class="app-icon" aria-hidden="true"></div>
-
-            <div class="app-content">
-              <h3>Next Launch</h3>
-
-              <div class="tag">Revolutionizing Connection</div>
-
-              <p>
-                Something extraordinary is on the horizon. A groundbreaking
-                platform designed to transform the way we connect, collaborate,
-                network, and do business.
-              </p>
-
-              <div class="app-actions">
-                <span class="view-link">Stay tuned.</span>
-              </div>
-            </div>
-          </article>
-        </div>
-
-        <section id="investors" class="investor-card">
-          <div class="investor-icon" aria-hidden="true">↗</div>
-
-          <div class="investor-copy">
-            <h3>Investors & Business Development</h3>
-
+      <section id="apps" class="section">
+        <div class="shell">
+          <div class="section-heading">
+            <div class="section-kicker">Our Apps</div>
+            <h2 class="steel-text">Built with Purpose</h2>
             <p>
-              Partner with us as we build the next generation of intelligent
-              software and digital experiences.
+              Focused products. Minimal noise. Designed for people who want sharper tools,
+              better systems, and early access to what comes next.
             </p>
-
-            <p class="serious">Serious inquiries only</p>
           </div>
 
-          <div class="email-panel">
-            <a
-              href="mailto:irvingindustries@outlook.com?subject=Investor%20or%20Business%20Development%20Inquiry"
-            >
-              irvingindustries@outlook.com
+          <div class="apps-grid">
+            <article class="app-card liquid apex">
+              <div class="app-top">
+                <img
+                  class="app-icon"
+                  src="./apex-ai-training-app-icon.png"
+                  alt="Apex AI Training app icon"
+                />
+
+                <span class="app-badge">Live</span>
+              </div>
+
+              <div class="app-copy">
+                <h3>Apex AI Training</h3>
+                <div class="app-tagline">AI Fitness App</div>
+                <p>
+                  Private, focused training intelligence. Built to help users train smarter,
+                  stay consistent, and push higher.
+                </p>
+
+                <div class="micro-list">
+                  <span>Train smarter</span>
+                  <span>AI guidance</span>
+                  <span>Performance focused</span>
+                </div>
+              </div>
+
+              <div class="app-actions">
+                <a
+                  class="store-link"
+                  href="https://apps.apple.com/us/app/apex-ai-training/id6761805344"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span class="apple-mark"></span>
+                  <span class="store-text">
+                    <span class="store-small">Download on the</span>
+                    <span class="store-big">App Store</span>
+                  </span>
+                </a>
+
+                <a
+                  class="text-link"
+                  href="https://apps.apple.com/us/app/apex-ai-training/id6761805344"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View Details →
+                </a>
+              </div>
+            </article>
+
+            <article class="app-card liquid objective">
+              <div class="app-top">
+                <img
+                  class="app-icon"
+                  src="./objective-seven-app-icon.png"
+                  alt="Objective Seven app icon"
+                />
+
+                <span class="app-badge">Live</span>
+              </div>
+
+              <div class="app-copy">
+                <h3>Objective Seven</h3>
+                <div class="app-tagline">Complete The Mission In Time.</div>
+                <p>
+                  Precision memory under pressure. Decode longer sequences,
+                  sharpen focus, and push your limits.
+                </p>
+
+                <div class="micro-list">
+                  <span>Precision</span>
+                  <span>Memory</span>
+                  <span>Focus under pressure</span>
+                </div>
+              </div>
+
+              <div class="app-actions">
+                <a
+                  class="store-link"
+                  href="https://apps.apple.com/us/app/objective-seven/id6762837362"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span class="apple-mark"></span>
+                  <span class="store-text">
+                    <span class="store-small">Download on the</span>
+                    <span class="store-big">App Store</span>
+                  </span>
+                </a>
+
+                <a
+                  class="text-link"
+                  href="https://apps.apple.com/us/app/objective-seven/id6762837362"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View Details →
+                </a>
+              </div>
+            </article>
+
+            <article class="app-card liquid puff">
+              <div class="app-top">
+                <img
+                  class="app-icon"
+                  src="./puff-puff-pass-app-icon.png"
+                  alt="Puff, Puff, Pass app icon"
+                />
+
+                <span class="app-badge">Live</span>
+              </div>
+
+              <div class="app-copy">
+                <h3>Puff, Puff, Pass</h3>
+                <div class="app-tagline">Quit Smoking Forever.</div>
+                <p>
+                  A clean, focused quit companion for smoke-free streaks,
+                  cravings, health milestones, and daily motivation.
+                </p>
+
+                <div class="micro-list">
+                  <span>Quit companion</span>
+                  <span>Health milestones</span>
+                  <span>Daily momentum</span>
+                </div>
+              </div>
+
+              <div class="app-actions">
+                <a
+                  class="store-link"
+                  href="https://apps.apple.com/us/app/puff-puff-pass/id6777687917"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span class="apple-mark"></span>
+                  <span class="store-text">
+                    <span class="store-small">Download on the</span>
+                    <span class="store-big">App Store</span>
+                  </span>
+                </a>
+
+                <a
+                  class="text-link"
+                  href="https://apps.apple.com/us/app/puff-puff-pass/id6777687917"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View Details →
+                </a>
+              </div>
+            </article>
+
+            <article class="app-card liquid chefvault">
+              <div class="app-top">
+                <img
+                  class="app-icon"
+                  src="./chefvault-ai-app-icon.png"
+                  alt="ChefVault AI app icon"
+                />
+
+                <span class="app-badge">Live</span>
+              </div>
+
+              <div class="app-copy">
+                <h3>ChefVault AI</h3>
+                <div class="app-tagline">Your Kitchen.</div>
+                <p>
+                  Your private culinary vault. Save recipes, generate ideas,
+                  cook smarter, and build momentum in the kitchen.
+                </p>
+
+                <div class="micro-list">
+                  <span>Private recipe vault</span>
+                  <span>AI sous-chef</span>
+                  <span>Cook smarter</span>
+                </div>
+              </div>
+
+              <div class="app-actions">
+                <a
+                  class="store-link"
+                  href="https://apps.apple.com/us/app/chefvault-ai/id6782126418"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span class="apple-mark"></span>
+                  <span class="store-text">
+                    <span class="store-small">Download on the</span>
+                    <span class="store-big">App Store</span>
+                  </span>
+                </a>
+
+                <a
+                  class="text-link"
+                  href="https://apps.apple.com/us/app/chefvault-ai/id6782126418"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View Details →
+                </a>
+              </div>
+            </article>
+
+            <article class="app-card liquid featured proxcimity">
+              <div>
+                <img
+                  class="app-icon"
+                  src="./proxcimity-app-icon.png"
+                  alt="Proxcimity app icon"
+                />
+              </div>
+
+              <div class="app-copy">
+                <span class="app-badge">Coming Soon</span>
+
+                <h3 style="margin-top: 18px;">Proxcimity</h3>
+                <div class="app-tagline">The Future of Connection.</div>
+
+                <p>
+                  More than networking. A new way to connect, verify presence,
+                  create opportunity, and build real-world momentum.
+                </p>
+
+                <div class="micro-list">
+                  <span>Invite-first energy</span>
+                  <span>Real-world connection</span>
+                  <span>Early access coming</span>
+                </div>
+
+                <div class="app-actions" style="margin-top: 28px;">
+                  <span class="store-link coming-soon">
+                    <span class="apple-mark"></span>
+                    <span class="store-text">
+                      <span class="store-small">App Store</span>
+                      <span class="store-big">Coming Soon</span>
+                    </span>
+                  </span>
+
+                  <a
+                    class="text-link"
+                    href="mailto:irvingindustries@outlook.com?subject=Proxcimity%20Early%20Access"
+                  >
+                    Request Early Access →
+                  </a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="legal" class="section">
+        <div class="shell">
+          <div class="section-heading">
+            <div class="section-kicker">Bylaws & Legal</div>
+            <h2 class="steel-text">Clean Structure. Clear Framework.</h2>
+            <p>
+              Key company, product, and stakeholder information organized in one place.
+            </p>
+          </div>
+
+          <div class="legal-grid">
+            <a class="legal-card liquid" href="#privacy" aria-label="Privacy Policy">
+              <div>
+                <div class="legal-icon">✓</div>
+                <h3>Privacy Policy</h3>
+                <p>How information is protected across our products and platforms.</p>
+              </div>
+
+              <span class="arrow">→</span>
             </a>
 
-            <span>
-              We are actively seeking strategic partnerships and investment
-              opportunities.
-            </span>
+            <a class="legal-card liquid" href="#terms" aria-label="Terms of Use">
+              <div>
+                <div class="legal-icon">▦</div>
+                <h3>Terms of Use</h3>
+                <p>Rules, rights, responsibilities, and product usage terms.</p>
+              </div>
+
+              <span class="arrow">→</span>
+            </a>
+
+            <a class="legal-card liquid" href="#operating-agreement" aria-label="Operating Agreement">
+              <div>
+                <div class="legal-icon">⚖</div>
+                <h3>Operating Agreement</h3>
+                <p>Company framework, governance, and operating structure.</p>
+              </div>
+
+              <span class="arrow">→</span>
+            </a>
+
+            <a class="legal-card liquid" href="#investors" aria-label="Investor Legal">
+              <div>
+                <div class="legal-icon">↗</div>
+                <h3>Investor / Legal</h3>
+                <p>Important information for partners, stakeholders, and opportunities.</p>
+              </div>
+
+              <span class="arrow">→</span>
+            </a>
           </div>
-        </section>
+        </div>
+      </section>
+
+      <section id="investors" class="section">
+        <div class="shell">
+          <div class="investor-panel liquid">
+            <div>
+              <div class="section-kicker" style="justify-content: flex-start;">Investors</div>
+
+              <h2 class="steel-text">Join the Build.</h2>
+
+              <p>
+                Irving Industries LLC is building a selective portfolio of intelligent
+                software and digital products. Strategic conversations are open for
+                partnerships, capital, distribution, and growth.
+              </p>
+            </div>
+
+            <a
+              class="button"
+              href="mailto:irvingindustries@outlook.com?subject=Investor%20or%20Business%20Development%20Inquiry"
+            >
+              Request Access <span>→</span>
+            </a>
+          </div>
+        </div>
       </section>
     </main>
 
-    <footer>
-      <div class="footer-inner">
-        <img
-          class="footer-logo"
-          src="./irving-industries-main-logo.jpeg"
-          alt="Irving Industries LLC logo"
-        />
+    <footer class="footer">
+      <div class="shell">
+        <div class="footer-panel liquid">
+          <img
+            class="footer-logo"
+            src="./irving-industries-main-logo.jpeg"
+            alt="Irving Industries LLC logo"
+          />
 
-        <span>
-          © <span id="year"></span> Irving Industries LLC. All rights reserved.
-        </span>
+          <div class="footer-center">
+            © <span id="year"></span> Irving Industries LLC. All rights reserved.
+          </div>
 
-        <div class="footer-social" aria-label="Social links">
-          <a
-            href="https://www.instagram.com/irvingindustries"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Follow Irving Industries on Instagram"
-            title="Follow on Instagram"
-          >
-            Follow on Instagram
-          </a>
+          <div class="footer-social">
+            <a
+              class="button secondary"
+              href="https://www.instagram.com/irvingindustries"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Follow on Instagram <span>→</span>
+            </a>
+          </div>
         </div>
       </div>
     </footer>
