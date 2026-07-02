@@ -167,63 +167,99 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      padding: 18px 0 0;
+      padding: 24px 0 12px;
+      background: linear-gradient(
+        180deg,
+        rgba(2, 3, 4, 0.94) 0%,
+        rgba(2, 3, 4, 0.72) 72%,
+        rgba(2, 3, 4, 0) 100%
+      );
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
     }
 
-    .nav-bar {
-      min-height: 72px;
+    .nav-inner {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 28px;
-      padding: 12px 22px;
-      border-radius: 999px;
+      gap: 30px;
     }
 
     .brand-link {
       display: flex;
       align-items: center;
-      gap: 14px;
-      min-width: 210px;
+      flex-shrink: 0;
     }
 
     .brand-logo {
-      width: 188px;
+      width: 210px;
       height: auto;
       object-fit: contain;
-      filter: drop-shadow(0 10px 28px rgba(255, 255, 255, 0.06));
+      filter:
+        drop-shadow(0 12px 28px rgba(0, 0, 0, 0.55))
+        drop-shadow(0 0 12px rgba(255, 255, 255, 0.06));
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 6px;
+      justify-content: flex-end;
+      gap: 26px;
       flex-wrap: wrap;
     }
 
     .nav-links a {
-      padding: 12px 14px;
-      border-radius: 999px;
-      color: var(--soft-white);
+      position: relative;
+      color: rgba(255, 255, 255, 0.76);
       font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.12em;
+      font-weight: 900;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -8px;
+      height: 1px;
+      transform: scaleX(0);
+      transform-origin: center;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.86), transparent);
+      transition: transform 0.2s ease;
     }
 
     .nav-links a:hover {
       color: #fff;
-      background: rgba(255, 255, 255, 0.08);
       transform: translateY(-1px);
     }
 
-    .nav-cta {
-      border: 1px solid rgba(255, 255, 255, 0.24);
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.035));
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .nav-links .contact-link {
+      color: #fff;
+      padding: 11px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.045);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.16),
+        0 12px 28px rgba(0, 0, 0, 0.24);
+    }
+
+    .nav-links .contact-link::after {
+      display: none;
+    }
+
+    .nav-links .contact-link:hover {
+      border-color: rgba(255, 255, 255, 0.42);
+      background: rgba(255, 255, 255, 0.075);
     }
 
     .hero {
@@ -652,6 +688,87 @@
       color: rgba(255, 255, 255, 0.82);
     }
 
+    .legal-docs {
+      margin-top: 34px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .legal-document {
+      border-radius: var(--radius-xl);
+      padding: 34px;
+      scroll-margin-top: 120px;
+    }
+
+    .legal-document h3 {
+      position: relative;
+      z-index: 2;
+      margin: 0 0 8px;
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1;
+      letter-spacing: -0.055em;
+    }
+
+    .legal-document .updated {
+      position: relative;
+      z-index: 2;
+      margin: 0 0 24px;
+      color: var(--steel-soft);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .legal-document h4 {
+      position: relative;
+      z-index: 2;
+      margin: 28px 0 8px;
+      color: rgba(255, 255, 255, 0.90);
+      font-size: 18px;
+      letter-spacing: -0.02em;
+    }
+
+    .legal-document p,
+    .legal-document li {
+      position: relative;
+      z-index: 2;
+      color: rgba(255, 255, 255, 0.64);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .legal-document p {
+      margin: 0 0 14px;
+    }
+
+    .legal-document ul {
+      position: relative;
+      z-index: 2;
+      margin: 10px 0 0;
+      padding-left: 22px;
+    }
+
+    .legal-document a {
+      color: #fff;
+      font-weight: 800;
+      text-decoration: underline;
+      text-decoration-color: rgba(255, 255, 255, 0.3);
+      text-underline-offset: 4px;
+    }
+
+    .back-to-legal {
+      position: relative;
+      z-index: 2;
+      margin-top: 26px;
+      display: inline-flex;
+      color: rgba(255, 255, 255, 0.76);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
     .investor-panel {
       border-radius: var(--radius-xl);
       padding: 38px;
@@ -710,18 +827,23 @@
     }
 
     @media (max-width: 980px) {
-      .nav-bar {
-        border-radius: 28px;
+      .nav-inner {
         align-items: flex-start;
         flex-direction: column;
+        gap: 18px;
       }
 
       .brand-logo {
-        width: 170px;
+        width: 190px;
       }
 
       .nav-links {
         justify-content: flex-start;
+        gap: 18px;
+      }
+
+      .hero {
+        padding-top: 70px;
       }
 
       .apps-grid {
@@ -755,17 +877,35 @@
     }
 
     @media (max-width: 620px) {
-      .shell {
+      .shell,
+      .nav-inner {
         width: min(100% - 26px, 1180px);
       }
 
-      .hero {
-        padding-top: 62px;
+      .nav {
+        padding-top: 18px;
+      }
+
+      .brand-logo {
+        width: 175px;
+      }
+
+      .nav-links {
+        width: 100%;
+        gap: 14px;
       }
 
       .nav-links a {
-        padding: 10px 11px;
         font-size: 10px;
+        letter-spacing: 0.11em;
+      }
+
+      .nav-links .contact-link {
+        padding: 9px 13px;
+      }
+
+      .hero {
+        padding-top: 58px;
       }
 
       .hero-mark {
@@ -790,6 +930,10 @@
         grid-template-columns: 1fr;
       }
 
+      .legal-document {
+        padding: 24px;
+      }
+
       .investor-panel {
         padding: 28px;
       }
@@ -809,29 +953,27 @@
 <body>
   <div class="page">
     <header class="nav">
-      <div class="shell">
-        <div class="nav-bar liquid">
-          <a class="brand-link" href="#home" aria-label="Irving Industries home">
-            <img
-              class="brand-logo"
-              src="./irving-industries-main-logo.jpeg"
-              alt="Irving Industries LLC logo"
-            />
-          </a>
+      <div class="nav-inner">
+        <a class="brand-link" href="#home" aria-label="Irving Industries home">
+          <img
+            class="brand-logo"
+            src="./irving-industries-main-logo.jpeg"
+            alt="Irving Industries LLC logo"
+          />
+        </a>
 
-          <nav class="nav-links" aria-label="Primary navigation">
-            <a href="#home">Home</a>
-            <a href="#apps">Apps</a>
-            <a href="#legal">Legal</a>
-            <a href="#investors">Investors</a>
-            <a
-              class="nav-cta"
-              href="mailto:irvingindustries@outlook.com?subject=Irving%20Industries%20Inquiry"
-            >
-              Contact
-            </a>
-          </nav>
-        </div>
+        <nav class="nav-links" aria-label="Primary navigation">
+          <a href="#home">Home</a>
+          <a href="#apps">Apps</a>
+          <a href="#legal">Legal</a>
+          <a href="#investors">Investors</a>
+          <a
+            class="contact-link"
+            href="mailto:irvingindustries@outlook.com?subject=Irving%20Industries%20Inquiry"
+          >
+            Contact
+          </a>
+        </nav>
       </div>
     </header>
 
@@ -1140,7 +1282,7 @@
           </div>
 
           <div class="legal-grid">
-            <a class="legal-card liquid" href="#privacy" aria-label="Privacy Policy">
+            <a class="legal-card liquid" href="#privacy-policy" aria-label="Privacy Policy">
               <div>
                 <div class="legal-icon">✓</div>
                 <h3>Privacy Policy</h3>
@@ -1150,7 +1292,7 @@
               <span class="arrow">→</span>
             </a>
 
-            <a class="legal-card liquid" href="#terms" aria-label="Terms of Use">
+            <a class="legal-card liquid" href="#terms-of-use" aria-label="Terms of Use">
               <div>
                 <div class="legal-icon">▦</div>
                 <h3>Terms of Use</h3>
@@ -1170,7 +1312,7 @@
               <span class="arrow">→</span>
             </a>
 
-            <a class="legal-card liquid" href="#investors" aria-label="Investor Legal">
+            <a class="legal-card liquid" href="#investor-legal" aria-label="Investor Legal">
               <div>
                 <div class="legal-icon">↗</div>
                 <h3>Investor / Legal</h3>
@@ -1179,6 +1321,303 @@
 
               <span class="arrow">→</span>
             </a>
+          </div>
+
+          <div class="legal-docs">
+            <article id="privacy-policy" class="legal-document liquid">
+              <h3 class="steel-text">Privacy Policy</h3>
+              <p class="updated">Last updated: July 2026</p>
+
+              <p>
+                This Privacy Policy explains how Irving Industries LLC collects,
+                uses, stores, and protects information in connection with its
+                websites, mobile applications, digital products, software services,
+                and related communications.
+              </p>
+
+              <h4>1. Information We May Collect</h4>
+              <p>
+                Irving Industries LLC may collect information that users voluntarily
+                provide, including names, email addresses, account information,
+                support requests, business inquiries, and other information submitted
+                through forms, apps, or direct communication.
+              </p>
+              <p>
+                Our applications may also collect limited technical information such
+                as device type, app usage data, crash diagnostics, performance data,
+                subscription status, and general analytics used to improve reliability
+                and user experience.
+              </p>
+
+              <h4>2. How Information Is Used</h4>
+              <p>
+                Information may be used to operate and improve our products, provide
+                app functionality, respond to inquiries, support users, process
+                subscriptions, improve safety and security, analyze performance, and
+                communicate product updates or business opportunities.
+              </p>
+
+              <h4>3. App Store, Payments, and Third-Party Platforms</h4>
+              <p>
+                Payments, subscriptions, and downloads may be handled through Apple
+                App Store services or other authorized third-party platforms. Irving
+                Industries LLC does not directly collect or store full payment card
+                information from App Store transactions.
+              </p>
+
+              <h4>4. Data Sharing</h4>
+              <p>
+                Irving Industries LLC does not sell personal information. Information
+                may be shared only as needed with trusted service providers, analytics
+                platforms, hosting providers, legal advisors, or as required by law,
+                regulation, legal process, or business protection needs.
+              </p>
+
+              <h4>5. Data Security</h4>
+              <p>
+                We use reasonable administrative, technical, and organizational
+                measures designed to protect information from unauthorized access,
+                misuse, loss, or disclosure. No digital system can be guaranteed to
+                be completely secure.
+              </p>
+
+              <h4>6. User Choices</h4>
+              <p>
+                Users may contact Irving Industries LLC to request access, correction,
+                or deletion of certain information, subject to legal, technical, and
+                operational limitations.
+              </p>
+
+              <h4>7. Children’s Privacy</h4>
+              <p>
+                Our products are not intended to knowingly collect personal
+                information from children under the age required by applicable law.
+                If we become aware that such information has been collected, we will
+                take reasonable steps to delete it.
+              </p>
+
+              <h4>8. Contact</h4>
+              <p>
+                Questions about this Privacy Policy may be sent to
+                <a href="mailto:irvingindustries@outlook.com">irvingindustries@outlook.com</a>.
+              </p>
+
+              <a class="back-to-legal" href="#legal">Back to Legal ↑</a>
+            </article>
+
+            <article id="terms-of-use" class="legal-document liquid">
+              <h3 class="steel-text">Terms of Use</h3>
+              <p class="updated">Last updated: July 2026</p>
+
+              <p>
+                These Terms of Use govern access to and use of websites, mobile
+                applications, digital products, services, content, and software
+                operated by Irving Industries LLC. By accessing or using our products,
+                users agree to these terms.
+              </p>
+
+              <h4>1. Use of Products</h4>
+              <p>
+                Users agree to use Irving Industries LLC products only for lawful,
+                authorized, and intended purposes. Users may not misuse, reverse
+                engineer, interfere with, exploit, copy, or attempt to compromise our
+                software, systems, intellectual property, or user experience.
+              </p>
+
+              <h4>2. Accounts and Access</h4>
+              <p>
+                Some products may require accounts, subscriptions, app permissions,
+                or access approval. Users are responsible for maintaining accurate
+                information and protecting their account access credentials.
+              </p>
+
+              <h4>3. Subscriptions and Purchases</h4>
+              <p>
+                Purchases, subscriptions, renewals, cancellations, and refunds may be
+                handled through the Apple App Store or other applicable platforms.
+                Users should review the terms of the platform used to complete the
+                transaction.
+              </p>
+
+              <h4>4. Product Availability</h4>
+              <p>
+                Irving Industries LLC may modify, suspend, remove, update, or
+                discontinue any product, feature, app, service, or content at any time
+                without guarantee of continued availability.
+              </p>
+
+              <h4>5. No Professional Advice</h4>
+              <p>
+                Our applications may provide informational, productivity, wellness,
+                fitness, cooking, lifestyle, networking, or AI-assisted content. Such
+                content is for general informational purposes only and should not be
+                treated as medical, legal, financial, safety, or professional advice.
+              </p>
+
+              <h4>6. User Content</h4>
+              <p>
+                If a product allows users to enter, upload, save, or submit content,
+                users remain responsible for that content and confirm they have the
+                right to use it. Users may not submit unlawful, infringing, harmful,
+                abusive, misleading, or unauthorized material.
+              </p>
+
+              <h4>7. Intellectual Property</h4>
+              <p>
+                All company names, logos, product names, designs, software, content,
+                interfaces, features, branding, and related assets are owned by or
+                licensed to Irving Industries LLC and may not be copied or reused
+                without permission.
+              </p>
+
+              <h4>8. Limitation of Liability</h4>
+              <p>
+                To the fullest extent permitted by law, Irving Industries LLC is not
+                liable for indirect, incidental, consequential, special, punitive, or
+                exemplary damages arising from use of or inability to use our products.
+              </p>
+
+              <h4>9. Changes to These Terms</h4>
+              <p>
+                We may update these Terms of Use from time to time. Continued use of
+                our products after updates means users accept the revised terms.
+              </p>
+
+              <h4>10. Contact</h4>
+              <p>
+                Questions about these Terms may be sent to
+                <a href="mailto:irvingindustries@outlook.com">irvingindustries@outlook.com</a>.
+              </p>
+
+              <a class="back-to-legal" href="#legal">Back to Legal ↑</a>
+            </article>
+
+            <article id="operating-agreement" class="legal-document liquid">
+              <h3 class="steel-text">Operating Agreement Summary</h3>
+              <p class="updated">Irving Industries LLC</p>
+
+              <p>
+                This section provides a public-facing summary of the operating
+                structure and governance principles of Irving Industries LLC. It is
+                not intended to replace the company’s formal operating agreement,
+                internal company records, ownership documents, or legal filings.
+              </p>
+
+              <h4>1. Company Identity</h4>
+              <p>
+                Irving Industries LLC is organized as a limited liability company
+                focused on software, mobile applications, digital products, digital
+                assets, business development, and related technology ventures.
+              </p>
+
+              <h4>2. Purpose</h4>
+              <p>
+                The company’s purpose is to develop, own, operate, manage, market,
+                and commercialize software products, mobile applications, digital
+                platforms, intellectual property, and related business opportunities.
+              </p>
+
+              <h4>3. Management</h4>
+              <p>
+                Company management, decision-making authority, ownership rights,
+                financial rights, member obligations, and internal controls are
+                governed by the official operating agreement and applicable law.
+              </p>
+
+              <h4>4. Intellectual Property</h4>
+              <p>
+                Product concepts, application names, designs, code, branding, digital
+                assets, software systems, business plans, and related intellectual
+                property are company assets unless otherwise documented in writing.
+              </p>
+
+              <h4>5. Confidentiality</h4>
+              <p>
+                Non-public company information, product roadmaps, financial
+                information, technical details, partnership discussions, investor
+                conversations, and proprietary materials may be confidential and
+                should not be disclosed without written authorization.
+              </p>
+
+              <h4>6. No Public Offer</h4>
+              <p>
+                Nothing on this website constitutes an offer to sell securities,
+                solicitation of investment, legal commitment, partnership agreement,
+                or binding business arrangement.
+              </p>
+
+              <h4>7. Formal Documents Control</h4>
+              <p>
+                If this summary conflicts with the company’s official records,
+                operating agreement, contracts, filings, or signed legal documents,
+                the official documents control.
+              </p>
+
+              <h4>8. Contact</h4>
+              <p>
+                Business, legal, or investor inquiries may be sent to
+                <a href="mailto:irvingindustries@outlook.com">irvingindustries@outlook.com</a>.
+              </p>
+
+              <a class="back-to-legal" href="#legal">Back to Legal ↑</a>
+            </article>
+
+            <article id="investor-legal" class="legal-document liquid">
+              <h3 class="steel-text">Investor / Legal Notice</h3>
+              <p class="updated">Important Information</p>
+
+              <p>
+                The information on this website is provided for general informational
+                and business development purposes only. It may describe current
+                products, planned products, future ideas, commercial goals, and early
+                strategic direction for Irving Industries LLC.
+              </p>
+
+              <h4>1. No Investment Offer</h4>
+              <p>
+                Nothing on this website constitutes an offer to sell, a solicitation
+                to buy, or a recommendation involving securities, investment
+                contracts, equity interests, debt instruments, tokens, digital assets,
+                or other financial instruments.
+              </p>
+
+              <h4>2. Forward-Looking Statements</h4>
+              <p>
+                Statements about future products, launches, availability, growth,
+                partnerships, user adoption, revenue potential, or market opportunity
+                are forward-looking and subject to change. Actual results may differ
+                materially.
+              </p>
+
+              <h4>3. No Guarantee</h4>
+              <p>
+                Product timelines, launch dates, app availability, feature sets,
+                business plans, and strategic opportunities are not guaranteed and
+                may be changed, delayed, suspended, or discontinued.
+              </p>
+
+              <h4>4. Confidential Discussions</h4>
+              <p>
+                Investor, partnership, acquisition, licensing, or business development
+                conversations may require separate written agreements, due diligence,
+                confidentiality terms, and legal review.
+              </p>
+
+              <h4>5. Independent Review</h4>
+              <p>
+                Any potential investor, partner, or stakeholder should conduct
+                independent review and consult qualified legal, financial, and tax
+                advisors before making any business or investment decision.
+              </p>
+
+              <h4>6. Contact</h4>
+              <p>
+                Serious investor and business development inquiries may be sent to
+                <a href="mailto:irvingindustries@outlook.com">irvingindustries@outlook.com</a>.
+              </p>
+
+              <a class="back-to-legal" href="#legal">Back to Legal ↑</a>
+            </article>
           </div>
         </div>
       </section>
